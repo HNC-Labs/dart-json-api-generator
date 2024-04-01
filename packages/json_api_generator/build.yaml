@@ -1,0 +1,21 @@
+targets:
+  $default:
+    builders:
+      json_api_generator:
+        enabled: true
+        generate_for:
+          exclude:
+            - test
+            - example
+          include:
+            - test/api/*
+            - test/api/**/*
+
+builders:
+  json_api_generator:
+    import: "package:json_api_generator/builder.dart"
+    builder_factories: ["jsonApiBuilder"]
+    build_extensions: {".dart": [".jsonapi.g.part"]}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
