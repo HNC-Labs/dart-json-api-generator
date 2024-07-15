@@ -24,17 +24,25 @@ class FunctionsApiGenerator extends GeneratorForAnnotation<FunctionsApi> {
 
       if (method.isPublic &&
           method.isAbstract &&
-          method.returnType.isDartAsyncFuture &&
-          method.parameters.length == 1) {
+          method.returnType.isDartAsyncFuture) {
         final returnType =
             (method.returnType as ParameterizedType).typeArguments[0];
 
         final parameter = method.parameters[0];
 
+        bool hasTimeout = false;
+
+        for (int i = 1; i < method.parameters.length; i++) {
+          final option = method.parameters[i];
+
+          if (option.name == "timeout") {
+            hasTimeout = true;
+          }
+        }
         result += '''  @override
   $method async {
     final functions = await getFunctions();
-    final callable = functions.httpsCallable("${method.name}");
+    final callable = functions.httpsCallable("${method.name}"${hasTimeout ? ", options: HttpsCallableOptions(timeout: timeout)" : ""});
     final response = await callable.call(${parameter.name}.toJson());
     
     ${returnType is DynamicType ? "" : "return $returnType.fromJson(response.data);"}

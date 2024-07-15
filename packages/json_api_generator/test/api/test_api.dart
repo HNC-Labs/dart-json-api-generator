@@ -20,5 +20,5 @@ class Request {
 
 @FunctionsApi()
 abstract class TestApi {
-  Future<Response> request(Request res);
+  Future<Response> request(Request res, {Duration? timeout});
 }
