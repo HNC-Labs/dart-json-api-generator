@@ -1,22 +1,22 @@
 name: json_api_generator
 description: A starting point for Dart libraries or applications.
-version: 1.0.0
-repository: https://github.com/breadkey/dart-json-api-generator
+version: 1.0.1
+repository: https://github.com/HNC-Labs/dart-json-api-generator
 
 environment:
-  sdk: ^3.3.0
+  sdk: '>=3.2.0 <4.0.0'
 
 # Add regular dependencies here.
 dependencies:
   build: ^2.4.1
-  source_gen: ^1.5.0
+  source_gen: ^2.0.0
   json_api_annotation:
     git:
-      url: https://github.com/breadkey/dart-json-api-generator
+      url: https://github.com/HNC-Labs/dart-json-api-generator
       ref: main
       path: packages/json_api_annotation
 
 dev_dependencies:
   build_runner: ^2.4.8
-  lints: ^3.0.0
+  lints: ^6.0.0
   test: ^1.24.0
